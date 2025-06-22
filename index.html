@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mood Mate</title>
+  <link rel="stylesheet" href="style.css" />
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+</head>
+<body class="loading">
+  <!-- Loader -->
+  <div id="loader">
+    <img src="https://wpamelia.com/wp-content/uploads/2018/11/ezgif-2-9d94781b522f.gif" alt="Loading..." />
+  </div>
+  <div class="container">
+    <img src="https://cdn.pixabay.com/animation/2022/11/01/09/21/09-21-24-793_512.gif" height="100" width="100">
+    <h1>Mood Mate 🎧</h1>
+    <label for="mood">How's your mood today?</label>
+    <select id="mood">
+      <option value="">How are you feeling?</option>
+      <option value="happy">Happy</option>
+      <option value="sad">Sad</option>
+      <option value="stressed"><b>Stressed/demotivated</b></option>
+      <option value="tired">Tired</option>
+    </select>
+    <select id="preference">
+      <option value="">Want music or productivity tips?</option>
+      <option value="music">Music</option>
+      <option value="quote">tips</option>
+    </select>
+    <button>Get Suggestion</button>
+    <div id="suggestion"></div>
+    <button id="celebrate-btn" style="display:none;">🎉 Celebrate!</button>
+    <div id="video-box" style="display:none;">
+      <iframe id="yt-video" width="360" height="215" frameborder="0" allowfullscreen></iframe>
+    </div>
+<a href="stress-relief.html">
+  <button id="stress-btn" style="display:none; background-color:#6a5acd;">🧘‍♀️ De-stress Now</button>
+</a>
+    <button id="theme-toggle">🌙</button>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>

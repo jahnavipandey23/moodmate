@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>De-Stress Now</title>
+  <style>
+    body {
+      margin: 0;
+      background: url('relax.gif') no-repeat center center fixed;
+      background-size: cover;
+      font-family: 'Segoe UI', sans-serif;
+      color: #fff;
+      overflow: hidden;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+    .ball {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #a770ef, #cf8bf3, #fdb99b);
+      background-size: 300% 300%;
+      animation: breathing 7s ease-in-out infinite,
+        magicColor 6s ease-in-out infinite;
+      box-shadow: 0 0 25px #a770ef80;
+    }
+    @keyframes breathing {
+      0% {
+        transform: scale(1);
+      }
+
+      25% {
+        transform: scale(1.15);
+      }
+
+      50% {
+        transform: scale(1.15);
+      }
+
+      75% {
+        transform: scale(0.9);
+      }
+
+      100% {
+        transform: scale(1);
+      }
+    }
+    @keyframes magicColor {
+      0% {
+        background-position: 0% 50%;
+      }
+
+      50% {
+        background-position: 100% 50%;
+      }
+
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+    h1 {
+      margin-bottom: 40px;
+      font-size: 2rem;
+    }
+    #breathe-text {
+      margin-top: 30px;
+      font-size: 1.2rem;
+      animation: textFade 5s ease-in-out infinite;
+    }
+    @keyframes textFade {
+      10% {
+        content: "Inhale...";
+        opacity: 1;
+      }
+      25% {
+        content: "Hold...";
+        opacity: 1;
+      }
+      50% {
+        content: "Hold...";
+        opacity: 1;
+      }
+      75% {
+        content: "Exhale...";
+        opacity: 1;
+      }
+      100% {
+        content: "Inhale...";
+        opacity: 1;
+      }
+    }
+
+    #music-btn {
+      margin-top: 40px;
+      padding: 10px 25px;
+      font-size: 1rem;
+      background-color: #8a2be2;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    #music-btn:hover {
+      background-color: #a34bf7;
+    }
+
+    #back-btn {
+      margin-top: 30px;
+      padding: 12px 24px;
+      font-size: 1rem;
+      background-color: #6a5acd;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    #back-btn:hover {
+      background-color: #5a4abf;
+    }
+
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      z-index: -1;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>🧘 De-Stress Now</h1>
+  <div class="ball"></div>
+  <div id="breathe-text"></div>
+  <button id="music-btn">Play Calm Music 🎵</button>
+  <audio id="calm-audio" loop>
+    <source src="mus.mp3" type="audio/mpeg">
+  </audio>
+  <canvas id="splash-canvas"></canvas>
+  <a href="index.html">
+    <button id="back-btn">⬅️ Back to Mood Mate</button>
+  </a>
+  <script>
+    // Breathing text change
+    const text = document.getElementById("breathe-text");
+    const sequence = ["Inhale...", "Hold...", "Exhale...", "Exhale..."];
+    let i = 0;
+    text.textContent = sequence[i % sequence.length];
+    i++;
+    setInterval(() => {
+      text.textContent = sequence[i % sequence.length];
+      i++;
+    }, 1750);
+    const musicBtn = document.getElementById("music-btn");
+    const audio = document.getElementById("calm-audio");
+    let isPlaying = false;
+    musicBtn.addEventListener("click", () => {
+      if (!isPlaying) {
+        audio.play();
+        musicBtn.textContent = "Pause Music ⏸️";
+      } else {
+        audio.pause();
+        musicBtn.textContent = "Play Calm Music 🎵";
+      }
+      isPlaying = !isPlaying;
+    });
+    // Magical oil splash effect (small size)
+    const canvas = document.getElementById("splash-canvas");
+    const ctx = canvas.getContext("2d");
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const particles = [];
+    class Particle {
+      constructor(x, y) {
+        this.x = x;
+        this.y = y;
+        this.size = Math.random() * 6 + 1;
+        this.speedX = Math.random() * 2 - 1;
+        this.speedY = Math.random() * 2 - 1;
+        this.color = `hsl(${Math.random() * 360}, 100%, 70%)`;
+      }
+      update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+        this.size *= 0.94;
+      }
+      draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fillStyle = this.color;
+        ctx.fill();
+      }
+    }
+    function handleParticles() {
+      for (let i = 0; i < particles.length; i++) {
+        particles[i].update();
+        particles[i].draw();
+        if (particles[i].size < 0.5) {
+          particles.splice(i, 1);
+          i--;
+        }
+      }
+    }
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      handleParticles();
+      requestAnimationFrame(animate);
+    }
+    animate();
+    window.addEventListener("mousemove", (e) => {
+      for (let i = 0; i < 3; i++) {
+        particles.push(new Particle(e.x, e.y));
+      }
+    });
+    window.addEventListener("resize", () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  </script>
+</body>
+
+</html>
