@@ -3,14 +3,12 @@ document.addEventListener("DOMContentLoaded", function () {
     setTimeout(() => {
         const loader = document.getElementById("loader");
         loader.classList.add("fade-out");
-
-        // Wait for the fade-out animation (1s) to finish before hiding and showing content
         setTimeout(() => {
             loader.style.display = "none";
             document.querySelector(".container").style.display = "block";
             document.body.classList.remove("loading");
-        }, 1000); // Match this with CSS fade-out duration
-    }, 2000); // Initial wait before fading out (like showing the loader for 2s)
+        }, 1000); 
+    }, 2000); 
     const moodSelect = document.getElementById("mood");
     const preferenceSelect = document.getElementById("preference");
     const suggestionBox = document.getElementById("suggestion");
@@ -18,10 +16,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const ytVideo = document.getElementById("yt-video");
     const themeToggle = document.getElementById("theme-toggle");
     const celebrateBtn = document.getElementById("celebrate-btn");
-
     document.querySelector("button").addEventListener("click", showSuggestion);
     themeToggle.addEventListener("click", toggleTheme);
-
     function sleepEmojiConfetti() {
         const emojis = ['💤', '🌙', '🛏️'];
         for (let i = 0; i < 100; i++) {
@@ -32,8 +28,6 @@ document.addEventListener("DOMContentLoaded", function () {
             span.style.left = `${Math.random() * 100}vw`;
             span.style.animationDelay = `${Math.random()}s`;
             document.body.appendChild(span);
-
-            // Remove emoji after animation
             setTimeout(() => {
                 span.remove();
             }, 3000);
@@ -110,9 +104,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 ]
             };
             if (quotes[mood]) {
-                suggestionBox.innerHTML =
-                    "<u>📈 Productivity Tips:</u><br><br>" +
-                    quotes[mood].map(tip => `<li>${tip}</li>`).join('');
+                suggestionBox.innerHTML ="<u>📈 Productivity Tips:</u><br><br>" +quotes[mood].map(tip => `<li>${tip}</li>`).join('');
             }
             videoBox.style.display = "none";
         }
@@ -154,11 +146,9 @@ document.addEventListener("DOMContentLoaded", function () {
     `).join('')}
         `;
             } else {
-                suggestionBox.innerHTML = "🎵 No songs available for this mood.";
-            }
+                suggestionBox.innerHTML = "🎵 No songs available for this mood.";            }
             videoBox.style.display = "none";
-        }
-    }
+        }    }
     function toggleTheme() {
         document.body.classList.toggle("dark");
         themeToggle.textContent = document.body.classList.contains("dark") ? "☀️" : "🌙";
