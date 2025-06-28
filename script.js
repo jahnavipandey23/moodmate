@@ -111,6 +111,7 @@ document.addEventListener("DOMContentLoaded", function () {
         else if (pref === "music") {
             const moodSongs = {
                 happy: [
+                     { title: "Happy -mix", url: "https://www.youtube.com/embed/0oaHwiZOUNc", thumbnail: "https://img.youtube.com/vi/0oaHwiZOUNc/hqdefault.jpg" },
                     { title: "Happy - Bollywood theme", url: "https://www.youtube.com/embed/nCKuoRYzAKI", thumbnail: "https://img.youtube.com/vi/nCKuoRYzAKI/hqdefault.jpg" },
                     { title: "beat-funk", url: "https://www.youtube.com/embed/YcTCIMKeiNQ", thumbnail: "https://img.youtube.com/vi/YcTCIMKeiNQ/hqdefault.jpg" }
                 ],
